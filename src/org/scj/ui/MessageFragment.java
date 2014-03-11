@@ -16,8 +16,6 @@ public class MessageFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(org.scj.R.layout.fragment_messsage, container,
 				false);
-		ListView timelineList = (ListView) rootView.findViewById(R.id.timeline_list);
-
 		return rootView;
 	}
 }

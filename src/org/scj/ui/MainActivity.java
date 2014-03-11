@@ -17,27 +17,23 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener {
 	public static String TAG = "TimeLineActivity";
 
 	String token;
 	TextView timeline;
-	private ScjApp mApp;
-	private RequestQueue mRequestQueue;
 	ActionBar actionBar;
 	ViewPager mViewPager;
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ImageView topnav[] = new ImageView[8];
+	RelativeLayout topnav_home_layout, topnav_search_layout, topnav_account_layout, topnav_activity_layout; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,34 +56,21 @@ public class MainActivity extends Activity {
 		topnav[6] = (ImageView) findViewById(R.id.topnav_activity);
 		topnav[7] = (ImageView) findViewById(R.id.topnav_activity_on);
 		
-		topnav[3].setAlpha(0);
-		topnav[5].setAlpha(0);
-		topnav[7].setAlpha(0);
+		topnav_home_layout = (RelativeLayout) findViewById(R.id.topnav_home_layout);
+		topnav_home_layout.setOnClickListener(this);
+		topnav_search_layout = (RelativeLayout) findViewById(R.id.topnav_search_layout);
+		topnav_search_layout.setOnClickListener(this);
+		topnav_account_layout = (RelativeLayout) findViewById(R.id.topnav_account_layout);
+		topnav_account_layout.setOnClickListener(this);
+		topnav_activity_layout = (RelativeLayout) findViewById(R.id.topnav_activity_layout);
+		topnav_activity_layout.setOnClickListener(this);
+		
 		
 		Resources res = getResources();
 		Bitmap bm = BitmapFactory.decodeResource(res,
 				R.drawable.topnav_background);
 		BitmapDrawable bd = new BitmapDrawable(res, bm);
 		actionBar.setBackgroundDrawable(bd);
-
-		mApp = ScjApp.getApp();
-		mRequestQueue = mApp.getRequestQueue();
-
-		mRequestQueue.add(
-				new JsonObjectRequest(Request.Method.GET,
-						getTimeLineUri(token), null,
-						new Response.Listener<JSONObject>() {
-							@Override
-							public void onResponse(JSONObject response) {
-								Log.d(TAG, response.toString());
-							}
-
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								Log.wtf(TAG, "fail!", error);
-							}
-						})).setTag(TAG);
 
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
@@ -107,21 +90,12 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				System.out.println(position + " " + positionOffset + " " + positionOffsetPixels);
 				topnav[position * 2 + 1].setAlpha(1 - positionOffset);
+				if (position != 3) {
+					topnav[position * 2 + 3].setAlpha(positionOffset);
+				}
 			}
 		});
 		super.onCreate(savedInstanceState);
-	}
-
-	private String getTimeLineUri(String token) {
-		return new StringBuilder(URLHelper.friends_timeline)
-				.append("?access_token=").append(token).toString();
-		// .append("&since_id=authorization_code")
-		// .append("&max_id=")
-		// .append("&count=")
-		// .append("&page=authorization_code")
-		// .append("&base_app=")
-		// .append("&feature=")
-		// .append("&trim_user=authorization_code").toString();
 	}
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -132,34 +106,51 @@ public class MainActivity extends Activity {
 		}
 
 		@Override
-		public Fragment getItem(int position) {
+		public Fragment getItem(int arg0) {
 			// TODO Auto-generated method stub
-			Fragment fragment = null;
-			switch (position) {
+			switch (arg0) {
 			case 0:
-				fragment = new TimeLineFragment();
-				break;
+				TimeLineFragment fragment =new TimeLineFragment();
+				fragment.setToken(token);
+				return fragment;
 			case 1:
-				fragment = new MessageFragment();
-				break;
+				return new MessageFragment();
 			case 2:
-				fragment = new TimeLineFragment();
-				break;
+				return new TimeLineFragment();
 			case 3:
-				fragment = new MessageFragment();
-				break;
-
+				return new MessageFragment();
 			default:
 				break;
 			}
-			
-			return fragment;
+			return null;
 		}
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
 			return 4;
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.topnav_home_layout:
+			mViewPager.setCurrentItem(0);
+			break;
+
+		case R.id.topnav_search_layout:
+			mViewPager.setCurrentItem(1);
+			break;
+			
+		case R.id.topnav_account_layout:
+			mViewPager.setCurrentItem(2);
+			break;
+			
+		case R.id.topnav_activity_layout:
+			mViewPager.setCurrentItem(3);
+			break;
 		}
 	}
 
