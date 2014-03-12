@@ -1,22 +1,16 @@
 package org.scj.ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.scj.R;
 import org.scj.ScjApp;
 import org.scj.URLHelper;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import org.scj.bean.StatusBean;
+import org.scj.bean.UserBean;
 
 import android.app.ListFragment;
 import android.os.Bundle;
@@ -27,6 +21,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TimeLineFragment extends ListFragment {
 	private static final String TAG = "TimeLineFragment";
@@ -36,6 +37,7 @@ public class TimeLineFragment extends ListFragment {
 	private TimeLineAdapter adapter;
 	private String token;
 	JSONObject data;
+	ArrayList<StatusBean> list = new ArrayList<StatusBean>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,8 +57,34 @@ public class TimeLineFragment extends ListFragment {
 							@Override
 							public void onResponse(JSONObject response) {
 								Log.d(TAG, response.toString());
+								
+								Gson gson = new Gson();
+								Map<String, Object> map = gson.fromJson(response.toString(), new TypeToken<Map<String, Object>>(){}.getType());
+								
+								List<Object> statusList = (List<Object>) map.get("statuses");
 
-								data = response;
+								Map map2 = null;
+								Map map3 = null;
+								Map map4 = null;
+								for(int i = 0; i < statusList.size() ; i++)
+								{
+									StatusBean status = new StatusBean();
+									StatusBean retweetStatus = new StatusBean();
+									UserBean user = new UserBean();
+									map2 = (Map) statusList.get(i);
+									System.out.println(map2);
+									map3 = (Map) map2.get("user");
+									map4 = (Map) map2.get("retweeted_status");
+									user.setScreen_name(map3.get("screen_name").toString());
+									if (map4 != null) {
+										retweetStatus.setText(map4.get("text").toString());
+									}
+									status.setText(map2.get("text").toString());
+									status.setRetweeted_status(retweetStatus);
+									status.setUser(user);
+									list.add(status);
+								}
+								
 								adapter = new TimeLineAdapter();
 								TimeLineFragment.this.setListAdapter(adapter);
 							}
@@ -75,6 +103,7 @@ public class TimeLineFragment extends ListFragment {
 	static class Holder {
 		TextView userName;
 		TextView text;
+		TextView retweet;
 	}
 	
 	private class TimeLineAdapter extends BaseAdapter {
@@ -82,19 +111,19 @@ public class TimeLineFragment extends ListFragment {
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 2;
+			return list.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return null;
+			return list.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
-			return 0;
+			return position;
 		}
 
 		@Override
@@ -107,19 +136,22 @@ public class TimeLineFragment extends ListFragment {
 				convertView = LayoutInflater.from(getActivity()).inflate(R.layout.weibo, null);
 				holder.userName = (TextView) convertView.findViewById(R.id.username);
 				holder.text = (TextView) convertView.findViewById(R.id.text);
+				holder.retweet = (TextView) convertView.findViewById(R.id.retweet);
 				
 				convertView.setTag(holder);
 			} else {
 				holder = (Holder) convertView.getTag();
 			}
 			
-			try {
-				holder.userName.setText(data.getString("total_number"));
-				holder.text.setText(data.getString("statuses"));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			holder.userName.setText(list.get(position).getUser().getScreen_name());
+			holder.text.setText(list.get(position).getText());
+			if (list.get(position).getRetweeted_status().getText() != null) {
+				holder.retweet.setVisibility(View.VISIBLE);
+				holder.retweet.setText(list.get(position).getRetweeted_status().getText());
+			} else {
+				holder.retweet.setVisibility(View.GONE);
 			}
+			
 			return convertView;
 		}
 		
@@ -127,10 +159,10 @@ public class TimeLineFragment extends ListFragment {
 	
 	private String getTimeLineUri(String token) {
 		return new StringBuilder(URLHelper.friends_timeline)
-				.append("?access_token=").append(token).toString();
+				.append("?access_token=").append(token)
 		// .append("&since_id=authorization_code")
 		// .append("&max_id=")
-		// .append("&count=")
+		 .append("&count=50").toString();
 		// .append("&page=authorization_code")
 		// .append("&base_app=")
 		// .append("&feature=")

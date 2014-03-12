@@ -1,8 +1,7 @@
 package org.scj;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
 import org.json.JSONObject;
 import org.scj.bean.AccessToken;
+import org.scj.support.SwipeBackActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;

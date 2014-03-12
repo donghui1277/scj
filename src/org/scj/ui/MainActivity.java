@@ -110,11 +110,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			// TODO Auto-generated method stub
 			switch (arg0) {
 			case 0:
-				TimeLineFragment fragment =new TimeLineFragment();
-				fragment.setToken(token);
-				return fragment;
+				TimeLineFragment timeLinefragment =new TimeLineFragment();
+				timeLinefragment.setToken(token);
+				return timeLinefragment;
 			case 1:
-				return new MessageFragment();
+				MessageFragment messageFragment =new MessageFragment();
+				messageFragment.setToken(token);
+				return messageFragment;
 			case 2:
 				return new TimeLineFragment();
 			case 3:

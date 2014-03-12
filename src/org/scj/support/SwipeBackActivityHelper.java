@@ -1,5 +1,5 @@
 
-package me.imid.swipebacklayout.lib.app;
+package org.scj.support;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import java.lang.reflect.Method;
-
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 /**
  * @author Yrom

@@ -1,7 +1,6 @@
 
-package me.imid.swipebacklayout.lib.app;
+package org.scj.support;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.View;

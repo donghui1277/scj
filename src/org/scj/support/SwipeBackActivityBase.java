@@ -1,6 +1,5 @@
-package me.imid.swipebacklayout.lib.app;
+package org.scj.support;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
 /**
  * @author Yrom
  */
