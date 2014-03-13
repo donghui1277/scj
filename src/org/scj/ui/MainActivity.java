@@ -91,7 +91,6 @@ public class MainActivity extends Activity implements OnClickListener {
 					int positionOffsetPixels) {
 				// TODO Auto-generated method stub
 				getActionBar().show();
-				System.out.println(position + " " + positionOffset + " " + positionOffsetPixels);
 				topnav[position * 2 + 1].setAlpha(1 - positionOffset);
 				if (position != 3) {
 					topnav[position * 2 + 3].setAlpha(positionOffset);
@@ -142,7 +141,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.topnav_home_layout:
-			mViewPager.setCurrentItem(0);
+			if (mViewPager.getCurrentItem() != 0) {
+				mViewPager.setCurrentItem(0);
+			} else {
+				System.out.println("ScrollToTop");
+			}
 			break;
 
 		case R.id.topnav_search_layout:
