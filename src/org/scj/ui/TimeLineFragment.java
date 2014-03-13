@@ -18,7 +18,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -29,27 +32,33 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class TimeLineFragment extends ListFragment {
+public class TimeLineFragment extends ListFragment implements OnScrollListener {
 	private static final String TAG = "TimeLineFragment";
 	
 	private ScjApp mApp;
 	private RequestQueue mRequestQueue;
 	private TimeLineAdapter adapter;
 	private String token;
+	private ListView listView;
+	private int listPositon;
 	JSONObject data;
 	ArrayList<StatusBean> list = new ArrayList<StatusBean>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_timeline, container, false);
+		listView = (ListView) inflater.inflate(R.layout.fragment_timeline, container, false);
+		listView.setOnScrollListener(TimeLineFragment.this);
+		return listView;
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mApp = ScjApp.getApp();
 		mRequestQueue = mApp.getRequestQueue();
-
+		
+		listPositon = 0;
+		
 		mRequestQueue.add(
 				new JsonObjectRequest(Request.Method.GET,
 						getTimeLineUri(token), null,
@@ -171,5 +180,35 @@ public class TimeLineFragment extends ListFragment {
 	
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "onScrollStateChanged" + scrollState);
+//		switch (scrollState) {
+//		case SCROLL_STATE_TOUCH_SCROLL:
+//			TimeLineFragment.this.getActivity().getActionBar().hide();
+//			listView.scrollBy(0, -48);
+//			break;
+//		case SCROLL_STATE_FLING:
+//			TimeLineFragment.this.getActivity().getActionBar().hide();
+//			break;
+//		default:
+//			break;
+//		}
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "onScroll" + firstVisibleItem + " " + listPositon);
+		if (firstVisibleItem > listPositon) {
+			TimeLineFragment.this.getActivity().getActionBar().hide();
+		} else if (firstVisibleItem < listPositon) {
+			TimeLineFragment.this.getActivity().getActionBar().show();
+		}
+		listPositon = firstVisibleItem;
 	}
 }

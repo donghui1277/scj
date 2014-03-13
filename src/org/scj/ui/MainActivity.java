@@ -19,6 +19,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+//		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		Intent intent = getIntent();
 		token = intent.getStringExtra("token");
 		setContentView(R.layout.root_fragment_activity);
@@ -88,6 +90,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			public void onPageScrolled(int position, float positionOffset,
 					int positionOffsetPixels) {
 				// TODO Auto-generated method stub
+				getActionBar().show();
 				System.out.println(position + " " + positionOffset + " " + positionOffsetPixels);
 				topnav[position * 2 + 1].setAlpha(1 - positionOffset);
 				if (position != 3) {

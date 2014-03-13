@@ -62,7 +62,7 @@ public class MessageFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.send:
-			String status = sendinfo.getText().toString();
+			String status = java.net.URLEncoder.encode(sendinfo.getText().toString());
 			mRequestQueue.add(
 					new JsonObjectRequest(Request.Method.POST, getUpdateUri(token, status),
 							null, new Response.Listener<JSONObject>() {
