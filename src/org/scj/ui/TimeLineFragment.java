@@ -40,9 +40,10 @@ public class TimeLineFragment extends ListFragment implements OnScrollListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		listView = (ListView) inflater.inflate(R.layout.fragment_timeline, container, false);
+		View view = inflater.inflate(R.layout.fragment_timeline, container, false);
+		listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setOnScrollListener(TimeLineFragment.this);
-		return listView;
+		return view;
 	}
 	
 	@Override

@@ -68,11 +68,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		topnav_activity_layout.setOnClickListener(this);
 		
 		
-		Resources res = getResources();
-		Bitmap bm = BitmapFactory.decodeResource(res,
-				R.drawable.topnav_background);
-		BitmapDrawable bd = new BitmapDrawable(res, bm);
-		actionBar.setBackgroundDrawable(bd);
+//		Resources res = getResources();
+//		Bitmap bm = BitmapFactory.decodeResource(res,
+//				R.drawable.topnav_background);
+//		BitmapDrawable bd = new BitmapDrawable(res, bm);
+//		actionBar.setBackgroundDrawable(bd);
+		
+		actionBar.setBackgroundDrawable(getWallpaper());
 
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 

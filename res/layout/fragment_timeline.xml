@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/android:list"
-    android:smoothScrollbar="true"
-    android:background="@android:color/holo_blue_bright"
-    android:divider="@android:color/transparent"
-    android:paddingLeft="10dp"
-    android:fastScrollEnabled="true"
-    android:dividerHeight="10dp"
-    android:scrollbarStyle="insideInset"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_bright"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:fastScrollEnabled="true"
+        android:paddingLeft="10dp"
+        android:scrollbarStyle="insideInset"
+        android:smoothScrollbar="true" />
     
-</ListView>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#cc99cc00" />
+
+</RelativeLayout>
