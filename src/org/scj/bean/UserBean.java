@@ -1,39 +1,148 @@
 package org.scj.bean;
 
-public class UserBean {
-	private	long	id; //用户UID
-	private	String	idstr; //字符串型的用户UID
-	private	String	screen_name; //用户昵称
-	private	String	name; //友好显示名称
-	private	int	province; //用户所在省级ID
-	private	int	city; //用户所在城市ID
-	private	String	location; //用户所在地
-	private	String	description; //用户个人描述
-	private	String	url; //用户博客地址
-	private	String	profile_image_url; //用户头像地址（中图），50×50像素
-	private	String	profile_url; //用户的微博统一URL地址
-	private	String	domain; //用户的个性化域名
-	private	String	weihao; //用户的微号
-	private	String	gender; //性别，m：男、f：女、n：未知
-	private	int	followers_count; //粉丝数
-	private	int	friends_count; //关注数
-	private	int	statuses_count; //微博数
-	private	int	favourites_count; //收藏数
-	private	String	created_at; //用户创建（注册）时间
-	private	boolean	following; //暂未支持
-	private	boolean	allow_all_act_msg; //是否允许所有人给我发私信，true：是，false：否
-	private	boolean	geo_enabled; //是否允许标识用户的地理位置，true：是，false：否
-	private	boolean	verified; //是否是微博认证用户，即加V用户，true：是，false：否
-	private	int	verified_type; //暂未支持
-	private	String	remark; //用户备注信息，只有在查询用户关系时才返回此字段
-	private	boolean	allow_all_comment; //是否允许所有人对我的微博进行评论，true：是，false：否
-	private	String	avatar_large; //用户头像地址（大图），180×180像素
-	private	String	avatar_hd; //用户头像地址（高清），高清头像原图
-	private	String	verified_reason; //认证原因
-	private	boolean	follow_me; //该用户是否关注当前登录用户，true：是，false：否
-	private	int	online_status; //用户的在线状态，0：不在线、1：在线
-	private	int	bi_followers_count; //用户的互粉数
-	private	String	lang; //用户当前的语言版本，zh-cn：简体中文，zh-tw：繁体中文，en：英语
+import android.os.Parcel;
+import android.os.Parcelable;
+
+/**
+ * 
+ * @author donghui
+ *
+ */
+public class UserBean implements Parcelable {
+	
+	/**
+	 *用户UID
+	 */
+	private long id; 
+	/**
+	 *字符串型的用户UID
+	 */
+	private String idstr; 
+	/**
+	 *用户昵称
+	 */
+	private String screen_name; 
+	/**
+	 *友好显示名称
+	 */
+	private String name; 
+	/**
+	 *用户所在省级ID
+	 */
+	private int province; 
+	/**
+	 *用户所在城市ID
+	 */
+	private int city; 
+	/**
+	 *用户所在地
+	 */
+	private String location; 
+	/**
+	 *用户个人描述
+	 */
+	private String description; 
+	/**
+	 *用户博客地址
+	 */
+	private String url; 
+	/**
+	 *用户头像地址（中图），50×50像素
+	 */
+	private String profile_image_url; 
+	/**
+	 *用户的微博统一URL地址
+	 */
+	private String profile_url; 
+	/**
+	 *用户的个性化域名
+	 */
+	private String domain; 
+	/**
+	 *用户的微号
+	 */
+	private String weihao; 
+	/**
+	 *性别，m：男、f：女、n：未知
+	 */
+	private String gender; 
+	/**
+	 *粉丝数
+	 */
+	private int followers_count; 
+	/**
+	 *关注数
+	 */
+	private int friends_count; 
+	/**
+	 *微博数
+	 */
+	private int statuses_count; 
+	/**
+	 *收藏数
+	 */
+	private int favourites_count; 
+	/**
+	 *用户创建（注册）时间
+	 */
+	private String created_at; 
+	/**
+	 *暂未支持
+	 */
+	private boolean following; 
+	/**
+	 *是否允许所有人给我发私信，true：是，false：否
+	 */
+	private boolean allow_all_act_msg; 
+	/**
+	 *是否允许标识用户的地理位置，true：是，false：否
+	 */
+	private boolean geo_enabled; 
+	/**
+	 *是否是微博认证用户，即加V用户，true：是，false：否
+	 */
+	private boolean verified; 
+	/**
+	 *暂未支持
+	 */
+	private int verified_type; 
+	/**
+	 *用户备注信息，只有在查询用户关系时才返回此字段
+	 */
+	private String remark; 
+	/**
+	 *是否允许所有人对我的微博进行评论，true：是，false：否
+	 */
+	private boolean allow_all_comment; 
+	/**
+	 *用户头像地址（大图），180×180像素
+	 */
+	private String avatar_large; 
+	/**
+	 *用户头像地址（高清），高清头像原图
+	 */
+	private String avatar_hd; 
+	/**
+	 *认证原因
+	 */
+	private String verified_reason; 
+	/**
+	 *该用户是否关注当前登录用户，true：是，false：否
+	 */
+	private boolean follow_me; 
+	/**
+	 *用户的在线状态，0：不在线、1：在线
+	 */
+	private int online_status; 
+	/**
+	 *用户的互粉数
+	 */
+	private int bi_followers_count; 
+	/**
+	 *用户当前的语言版本，zh-cn：简体中文，zh-tw：繁体中文，en：英语
+	 */
+	private String lang; 
+
 	public long getId() {
 		return id;
 	}
@@ -232,4 +341,93 @@ public class UserBean {
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(id);
+		dest.writeString(idstr);
+		dest.writeString(screen_name);
+		dest.writeString(name);
+		dest.writeInt(province);
+		dest.writeInt(city);
+		dest.writeString(location);
+		dest.writeString(description);
+		dest.writeString(url);
+		dest.writeString(profile_image_url);
+		dest.writeString(profile_url);
+		dest.writeString(domain);
+		dest.writeString(weihao);
+		dest.writeString(gender);
+		dest.writeInt(followers_count);
+		dest.writeInt(friends_count);
+		dest.writeInt(statuses_count);
+		dest.writeInt(favourites_count);
+		dest.writeString(created_at);
+		dest.writeInt(verified_type);
+		dest.writeString(remark);
+		dest.writeString(avatar_large);
+		dest.writeString(avatar_hd);
+		dest.writeString(verified_reason);
+		dest.writeInt(online_status);
+		dest.writeInt(bi_followers_count);
+		dest.writeString(lang);
+		
+		dest.writeBooleanArray(new boolean[]{this.following, this.allow_all_act_msg, this.geo_enabled, this.verified, this.allow_all_comment, this.follow_me});
+	}
+	
+	public final static Parcelable.Creator<UserBean> CREATOR =
+			new Creator<UserBean>() {
+				
+				@Override
+				public UserBean[] newArray(int size) {
+					return new UserBean[size];
+				}
+				
+				@Override
+				public UserBean createFromParcel(Parcel source) {
+					UserBean userBean = new UserBean();
+					userBean.id  = source.readInt();
+					userBean.idstr  = source.readString();
+					userBean.screen_name  = source.readString();
+					userBean.name  = source.readString();
+					userBean.province  = source.readInt();
+					userBean.city  = source.readInt();
+					userBean.location  = source.readString();
+					userBean.description  = source.readString();
+					userBean.url  = source.readString();
+					userBean.profile_image_url  = source.readString();
+					userBean.profile_url  = source.readString();
+					userBean.domain  = source.readString();
+					userBean.weihao  = source.readString();
+					userBean.gender  = source.readString();
+					userBean.followers_count  = source.readInt();
+					userBean.friends_count  = source.readInt();
+					userBean.statuses_count  = source.readInt();
+					userBean.favourites_count  = source.readInt();
+					userBean.created_at  = source.readString();
+					userBean.verified_type  = source.readInt();
+					userBean.remark  = source.readString();
+					userBean.avatar_large  = source.readString();
+					userBean.avatar_hd  = source.readString();
+					userBean.verified_reason  = source.readString();
+					userBean.online_status  = source.readInt();
+					userBean.bi_followers_count  = source.readInt();
+					userBean.lang  = source.readString();
+
+					boolean[] booleans = new boolean[6];
+					source.readBooleanArray(booleans);
+					userBean.following = booleans[0];
+					userBean.allow_all_act_msg = booleans[1];
+					userBean.geo_enabled = booleans[2];
+					userBean.verified = booleans[3];
+					userBean.allow_all_comment = booleans[4];
+					userBean.follow_me = booleans[5];
+					
+					return userBean;
+				}
+			};
 }

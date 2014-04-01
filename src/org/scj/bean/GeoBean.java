@@ -1,11 +1,14 @@
 package org.scj.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 
  * @author donghui
  * 
  */
-public class GeoBean {
+public class GeoBean implements Parcelable {
 	private String longitude; // 经度坐标
 	private String latitude; // 维度坐标
 	private String city; // 所在城市的城市代码
@@ -87,5 +90,49 @@ public class GeoBean {
 	public void setMore(String more) {
 		this.more = more;
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(longitude);
+		dest.writeString(latitude);
+		dest.writeString(city);
+		dest.writeString(province);
+		dest.writeString(city_name);
+		dest.writeString(province_name);
+		dest.writeString(address);
+		dest.writeString(pinyin);
+		dest.writeString(more);
+	}
+	
+	public final static Parcelable.Creator<GeoBean> CREATOR = 
+			new Creator<GeoBean>() {
+				
+				@Override
+				public GeoBean[] newArray(int size) {
+					return new GeoBean[size];
+				}
+				
+				@Override
+				public GeoBean createFromParcel(Parcel source) {
+					GeoBean geoBean = new GeoBean();
+					geoBean.longitude = source.readString();
+					geoBean.latitude = source.readString();
+					geoBean.city = source.readString();
+					geoBean.province = source.readString();
+					geoBean.city_name = source.readString();
+					geoBean.province_name = source.readString();
+					geoBean.address = source.readString();
+					geoBean.pinyin = source.readString();
+					geoBean.more = source.readString();
+					
+					return geoBean;
+				}
+			};
 
 }

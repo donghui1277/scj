@@ -1,6 +1,9 @@
 package org.scj.bean;
 
-public class CommentBean {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CommentBean implements Parcelable {
 	private	String	created_at; //评论创建时间
 	private	long	id; //评论的ID
 	private	String	text; //评论的内容
@@ -9,7 +12,7 @@ public class CommentBean {
 	private	String	mid; //评论的MID
 	private	String	idstr; //字符串型的评论ID
 	private	StatusBean	status; //评论的微博信息字段 详细
-	private	Object	reply_comment; //评论来源评论，当本评论属于对另一评论的回复时返回此字段
+	private	CommentBean	reply_comment; //评论来源评论，当本评论属于对另一评论的回复时返回此字段
 	public String getCreated_at() {
 		return created_at;
 	}
@@ -58,11 +61,52 @@ public class CommentBean {
 	public void setStatus(StatusBean status) {
 		this.status = status;
 	}
-	public Object getReply_comment() {
+	public CommentBean getReply_comment() {
 		return reply_comment;
 	}
-	public void setReply_comment(Object reply_comment) {
+	public void setReply_comment(CommentBean reply_comment) {
 		this.reply_comment = reply_comment;
 	}
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+		dest.writeString(created_at);
+		dest.writeLong(id);
+		dest.writeString(text);
+		dest.writeString(source);
+		dest.writeParcelable(user, flags);
+		dest.writeString(idstr);
+		dest.writeParcelable(status, flags);
+		dest.writeParcelable(reply_comment, flags);
+	}
+	
+	public final static Parcelable.Creator<CommentBean> CREATOR =
+			new Creator<CommentBean>() {
+				
+				@Override
+				public CommentBean[] newArray(int size) {
+					return new CommentBean[size];
+				}
+				
+				@Override
+				public CommentBean createFromParcel(Parcel source) {
+					CommentBean commentBean = new CommentBean();
+					commentBean.created_at = source.readString();
+					commentBean.id = source.readLong();
+					commentBean.text = source.readString();
+					commentBean.source = source.readString();
+					commentBean.user = source.readParcelable(UserBean.class.getClassLoader());
+					commentBean.idstr = source.readString();
+					commentBean.status = source.readParcelable(StatusBean.class.getClassLoader());
+					commentBean.reply_comment = source.readParcelable(CommentBean.class.getClassLoader());
+					
+					return commentBean;
+				}
+			};
 
 }

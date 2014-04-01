@@ -2,9 +2,10 @@ package org.scj.ui;
 
 import org.json.JSONObject;
 import org.scj.R;
-import org.scj.ScjApp;
+import org.scj.AppData;
 import org.scj.URLHelper;
 import org.scj.bean.ListStatusBean;
+import org.scj.data.RequestManage;
 
 import android.app.ListFragment;
 import android.os.Bundle;
@@ -30,12 +31,10 @@ import com.google.gson.Gson;
 public class TimeLineFragment extends ListFragment implements OnScrollListener {
 	private static final String TAG = "TimeLineFragment";
 	
-	private ScjApp mApp;
 	private RequestQueue mRequestQueue;
 	private TimeLineAdapter adapter;
 	private String token;
 	private ListView listView;
-	private int listPositon;
 	ListStatusBean listStatus;
 	
 	@Override
@@ -48,10 +47,7 @@ public class TimeLineFragment extends ListFragment implements OnScrollListener {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		mApp = ScjApp.getApp();
-		mRequestQueue = mApp.getRequestQueue();
-		
-		listPositon = 0;
+		mRequestQueue = RequestManage.getRequestQueue();
 		
 		mRequestQueue.add(
 				new JsonObjectRequest(Request.Method.GET,

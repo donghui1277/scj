@@ -2,7 +2,7 @@ package org.scj.ui;
 
 import org.json.JSONObject;
 import org.scj.R;
-import org.scj.ScjApp;
+import org.scj.AppData;
 import org.scj.URLHelper;
 
 import android.app.ActionBar;
@@ -120,7 +120,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				messageFragment.setToken(token);
 				return messageFragment;
 			case 2:
-				return new TimeLineFragment();
+				return new MessageFragment();
 			case 3:
 				return new MessageFragment();
 			default:

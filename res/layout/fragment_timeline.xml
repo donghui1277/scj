@@ -2,12 +2,13 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@id/android:list"
     android:smoothScrollbar="true"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:background="@android:color/background_dark"
+    android:background="@android:color/holo_blue_bright"
     android:divider="@android:color/transparent"
-    android:dividerHeight="10dp"
+    android:paddingLeft="10dp"
     android:fastScrollEnabled="true"
+    android:dividerHeight="10dp"
+    android:scrollbarStyle="insideInset"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
 </ListView>

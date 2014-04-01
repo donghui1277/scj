@@ -47,5 +47,24 @@ public class AccessToken implements Parcelable {
 		dest.writeString(uid);
 	}
 	
+	public final static Parcelable.Creator<AccessToken> CREATOR =
+			new Creator<AccessToken>() {
+				
+				@Override
+				public AccessToken[] newArray(int size) {
+					return new AccessToken[size];
+				}
+				
+				@Override
+				public AccessToken createFromParcel(Parcel source) {
+					AccessToken accessToken = new AccessToken();
+					accessToken.access_token = source.readString();
+					accessToken.expires_in = source.readInt();
+					accessToken.remind_in = source.readString();
+					accessToken.uid = source.readString();
+					
+					return accessToken;
+				}
+			};
 	
 }

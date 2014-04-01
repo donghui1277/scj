@@ -1,11 +1,13 @@
 package org.scj;
 import org.json.JSONObject;
 import org.scj.bean.AccessToken;
+import org.scj.data.RequestManage;
 import org.scj.support.SwipeBackActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -31,7 +33,7 @@ public class OAuthActivity extends SwipeBackActivity {
 	private static String TAG = "OAuthActivity";
 
 	private WebView webView;
-	private ScjApp mApp;
+	private Context mApp;
 	private RequestQueue mRequestQueue;
 
 	@Override
@@ -40,8 +42,8 @@ public class OAuthActivity extends SwipeBackActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_oauth);
 
-		mApp = ScjApp.getApp();
-		mRequestQueue = mApp.getRequestQueue();
+		mApp = AppData.getContext();
+		mRequestQueue = RequestManage.getRequestQueue();
 		ActionBar actionBar = getActionBar();
 		actionBar.setTitle("授权");
 		actionBar.setDisplayHomeAsUpEnabled(true);

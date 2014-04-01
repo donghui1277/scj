@@ -3,8 +3,9 @@ package org.scj.ui;
 import org.json.JSONObject;
 import org.scj.OAuthActivity;
 import org.scj.R;
-import org.scj.ScjApp;
+import org.scj.AppData;
 import org.scj.URLHelper;
+import org.scj.data.RequestManage;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,7 +33,6 @@ public class MessageFragment extends Fragment implements OnClickListener {
 	private String token;
 	private EditText sendinfo;
 	private ImageView send;
-	private ScjApp mApp;
 	private RequestQueue mRequestQueue;
 
 	@Override
@@ -51,8 +51,7 @@ public class MessageFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		mApp = ScjApp.getApp();
-		mRequestQueue = mApp.getRequestQueue();
+		mRequestQueue = RequestManage.getRequestQueue();
 		
 		super.onCreate(savedInstanceState);
 	}
