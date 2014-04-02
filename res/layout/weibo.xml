@@ -2,54 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="30sp" />
+        android:layout_margin="10dp" >
 
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/snoopy" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profile_image"
+            android:layout_marginBottom="5dp"
+            android:singleLine="true"
+            android:text="酷勤网程序员的那点事"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="20sp" />
+        
+
+        <TextView
+            android:id="@+id/create_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profile_image"
+            android:layout_below="@+id/username"
+            android:singleLine="true"
+            android:text="11:11" />
+        
+          <TextView
+            android:id="@+id/source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/create_at"
+            android:layout_below="@+id/username"
+            android:singleLine="true"
+            android:text="酷勤网程序员的那点事酷勤网程序员的那点事" />
+        
+        <ImageView 
+            android:id="@+id/menu"
+            android:src="@drawable/menubutton"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"/>
+    
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-    <ImageView 
+    <ImageView
         android:id="@+id/status_pic"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    
-    
-    
-    <LinearLayout 
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
         android:id="@+id/retweet_status_layout"
-        android:background="@drawable/ui_toggle_pressed"
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        
-        <TextView 
-            android:id="@+id/retweet_username"
+        android:background="@drawable/ui_toggle_pressed"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/retweet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CNN"/>
-        
-        <TextView
-        android:id="@+id/retweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextVfdafasfasfdasdfasfddssssssssssssssssssssssssssssssssssssssdfsadfgadsrhjuklkiufdsshjiew" />
-        
-        <ImageView 
-        android:id="@+id/retweet_status_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            android:text="TextVfdafasfasfdasdfasfddssssssssssssssssssssssssssssssssssssssdfsadfgadsrhjuklkiufdsshjiew" />
+
+        <ImageView
+            android:src="@drawable/snoopy"
+            android:id="@+id/retweet_status_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

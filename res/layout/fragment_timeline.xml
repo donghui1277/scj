@@ -14,7 +14,10 @@
         android:scrollbarStyle="insideInset"
         android:smoothScrollbar="true" />
     
-    <View 
+    <TextView
+        android:visibility="gone"
+        android:text="更新了20条信息" 
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="#cc99cc00" />
