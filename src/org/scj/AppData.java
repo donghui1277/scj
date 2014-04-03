@@ -1,7 +1,5 @@
 package org.scj;
 
-import org.scj.data.RequestManage;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,7 +16,6 @@ public class AppData extends Application {
 		// TODO Auto-generated method stub
 		sContext = getApplicationContext();
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-		RequestManage.init(AppData.getContext());
 		
 		super.onCreate();
 	}

@@ -1,31 +1,26 @@
 package org.scj.ui;
 
 import org.json.JSONObject;
-import org.scj.OAuthActivity;
 import org.scj.R;
-import org.scj.AppData;
 import org.scj.URLHelper;
-import org.scj.data.RequestManage;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import org.scj.data.RequestManager;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 public class MessageFragment extends Fragment implements OnClickListener {
 	private static final String TAG = "MessageFragment";
@@ -51,7 +46,7 @@ public class MessageFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		mRequestQueue = RequestManage.getRequestQueue();
+		mRequestQueue = RequestManager.mRequestQueue;
 		
 		super.onCreate(savedInstanceState);
 	}

@@ -1,0 +1,23 @@
+
+package org.scj.util;
+
+import android.content.Context;
+import android.os.Build;
+import android.os.Environment;
+
+import java.io.File;
+
+public class CacheUtils {
+
+    public static File getExternalCacheDir(final Context context) {
+        if (hasExternalCacheDir())
+            return context.getExternalCacheDir();
+
+        final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
+        return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
+    }
+
+    public static boolean hasExternalCacheDir() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
+    }
+}

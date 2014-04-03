@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-    <ImageView
+   <ImageView
         android:id="@+id/status_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -87,10 +87,9 @@
             android:text="TextVfdafasfasfdasdfasfddssssssssssssssssssssssssssssssssssssssdfsadfgadsrhjuklkiufdsshjiew" />
 
         <ImageView
-            android:src="@drawable/snoopy"
             android:id="@+id/retweet_status_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>
